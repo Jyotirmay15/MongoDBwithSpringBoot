@@ -7,6 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -61,8 +62,10 @@ public class StudentService {
 
     public List<Student> allWithSorting() {
         Sort sort = Sort.by(Sort.Direction.ASC, "name");
-
         return studentRespository.findAll(sort);
     }
 
+    public List<Student> byDepartmentName(@RequestParam String deptName) {
+        return studentRespository.findByDepartmentDepartmentName(deptName);
+    }
 }

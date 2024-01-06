@@ -62,4 +62,9 @@ public class StudentController {
     public String deleteStudent(@PathVariable String id) {
         return studentService.deleteStudent(id);
     }
+
+    @GetMapping("/byDepartmentName")
+    public List<Student> byDepartmentName(@RequestParam String deptName) {
+        return studentService.byDepartmentName(deptName);
+    }
 }
