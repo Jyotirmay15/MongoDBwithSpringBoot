@@ -58,7 +58,7 @@ public class StudentService {
     }
 
     public List<Student> getStudentsByName(String name) {
-        return studentRespository.findByName(name);
+        return studentRespository.getByName(name);
     }
 
     public List<Student> studentsByNameAndMail(String name, String email) {
@@ -90,5 +90,9 @@ public class StudentService {
 
     public List<Student> emailLike(String email) {
         return studentRespository.findByEmailIsLike(email);
+    }
+
+    public List<Student> byDepartmentId(String deptId) {
+        return studentRespository.findByDepartmentId(deptId);
     }
 }
