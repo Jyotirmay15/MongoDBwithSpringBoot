@@ -2,6 +2,7 @@ package com.example.entity;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -18,8 +19,13 @@ public class Student {
     @Field(name = "mail")
     private String email;
 
+    //This annotation tell that this class is reference to a collection
+    @DBRef
     private Department department;
 
+    // For @DBRef(lazy=true) this document would not be populated automatically, you have to do it explicitly with your own logic
+//    @DBRef (lazy = true)
+    @DBRef
     private List<Subject> subjects;
 
     //used to ignore this field for entry into collection

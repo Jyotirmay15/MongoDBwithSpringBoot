@@ -1,7 +1,9 @@
 package com.example.service;
 
 import com.example.entity.Student;
+import com.example.repository.DepartmentRepository;
 import com.example.repository.StudentRespository;
+import com.example.repository.SubjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -16,7 +18,21 @@ public class StudentService {
     @Autowired
     StudentRespository studentRespository;
 
+    @Autowired
+    DepartmentRepository departmentRepository;
+
+    @Autowired
+    SubjectRepository subjectRepository;
+
     public Student createStudent(Student student) {
+        //When using references, we need to save the sub documents first before saving the main document
+        if (student.getDepartment() != null) {
+            departmentRepository.save(student.getDepartment());
+        }
+        if (student.getSubjects() != null && student.getSubjects().size() > 0) {
+            subjectRepository.saveAll(student.getSubjects());
+        }
+
         return studentRespository.save(student);
     }
 
